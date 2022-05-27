@@ -98,7 +98,10 @@ type1<-c("D1C","D1C","D1C","D1T","D1T","D1T","D2C","D2C","D2C","D2T","D2T","D2T"
 df1<-data.frame(days,height1,type1)
 df1
 library(ggplot2)
-ggplot(height_data, aes(x=time, y=C1_PC_height))+
-  geom_point()
+#ggplot(height_data, aes(x=time, y=C1_PC_height))+
+  #geom_point()
 ggplot(df1, aes(x=days, y=height1, color=type1))+
-  geom_boxplot()
+  geom_boxplot()+
+  scale_x_discrete(name="Time [days]")+
+  scale_y_discrete(name="Height [cm]")
+  
