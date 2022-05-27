@@ -30,8 +30,8 @@ C3_PC_leaf_root_mass<- C3_PC_leaf_mass + C3_PC_root_mass
 
 # Average
 
-C_PC_leaf_mass<- C1_PC_leaf_mass + C2_PC_leaf_mass + C3_PC_leaf_mass
-C_PC_leaf_root_mass<- C1_PC_leaf_root_mass + C2_PC_leaf_root_mass + C3_PC_leaf_root_mass
+C_PC_leaf_mass<- (C1_PC_leaf_mass + C2_PC_leaf_mass + C3_PC_leaf_mass)/3
+C_PC_leaf_root_mass<- (C1_PC_leaf_root_mass + C2_PC_leaf_root_mass + C3_PC_leaf_root_mass)/3
 
 # Test PC Leaf mass (T1l, T2l, T3l, T4l, T5l)[g]
 
@@ -49,21 +49,29 @@ T3_PC_leaf_root_mass<-T3_PC_leaf_mass + T3_PC_root_mass
 
 # Average
 
-T_PC_leaf_mass<- T1_PC_leaf_mass + T2_PC_leaf_mass + T3_PC_leaf_mass
-T_PC_leaf_root_mass<- T1_PC_leaf_root_mass + T2_PC_leaf_root_mass + T3_PC_leaf_root_mass
+T_PC_leaf_mass<- (T1_PC_leaf_mass + T2_PC_leaf_mass + T3_PC_leaf_mass)/3
+T_PC_leaf_root_mass<- (T1_PC_leaf_root_mass + T2_PC_leaf_root_mass + T3_PC_leaf_root_mass)/3
 
 ### Plotting
 # BoxPlot CPClr, CPCl, TPClr, TPCl
-boxplot(C_PC_leaf_root_mass, C_PC_leaf_mass, T_PC_leaf_root_mass, T_PC_leaf_mass, names=c("CPClr", "CPCl", "TPClr", "TPCl"), ylab="Biomass [g]")
+#boxplot(C_PC_leaf_root_mass, C_PC_leaf_mass, T_PC_leaf_root_mass, T_PC_leaf_mass, names=c("CPClr", "CPCl", "TPClr", "TPCl"), ylab="Biomass [g]")
 # Boxplot CPClr, TPClr, CPCl, TPCl
 boxplot(C_PC_leaf_root_mass, T_PC_leaf_root_mass, C_PC_leaf_mass, T_PC_leaf_mass, names=c("CPClr", "TPCl", "CPCl", "TPCl"), ylab="Biomass [g]")
 
 ### Leaf area ###
+# extracting data [cm^2]
+C1_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 4])[1]))
+C2_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 8])[1]))
+C3_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 12])[1]))
 
-C1_PC_leaf_area
-C2_PC_leaf_area
-C3_PC_leaf_area
+T1_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 16])[1]))
+T2_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 20])[1]))
+T3_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 24])[1]))
 
-T1_PC_leaf_area
-T2_PC_leaf_area
-T3_PC_leaf_area
+# averages
+C_PC_leaf_area<- (C1_PC_leaf_area + C2_PC_leaf_area + C3_PC_leaf_area)/3
+T_PC_leaf_area<- (T1_PC_leaf_area + T2_PC_leaf_area + T3_PC_leaf_area)/3
+
+# Boxplot
+
+boxplot(C_PC_leaf_area, T_PC_leaf_area, names=c("CPCla", "TPCla"), ylab="Area [cm]")
