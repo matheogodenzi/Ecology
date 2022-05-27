@@ -41,9 +41,6 @@ T3_PC_leaf_roots_mass<-T3_PC_leaf_mass + T3_PC_root_mass
 
 
 
-
-<<<<<<< HEAD
-=======
 # Height
 time<-c(1,2,3)
 C1_PC_height<-c(5, 10, 71)
@@ -69,4 +66,4 @@ ggplot(df1, aes(x=days, y=height1, color=type1))+
   scale_x_discrete(name="Time [days]")+
   scale_y_discrete(name="Height [cm]")
   
->>>>>>> 8747e10782dba13aa908f954c5a45a7ed9c7bc59
+
