@@ -81,13 +81,24 @@ boxplot(C_PC_leaf_area, T_PC_leaf_area, names=c("CPCla", "TPCla"), ylab="Area [c
 # as the data from excel is corrupted, manual input is made
 
 # Height
-time(1,2,3)
+time<-c(1,2,3)
 C1_PC_height<-c(5, 10, 71)
 C2_PC_height<-c(5, 10, 35.6)
 C3_PC_height<-c(5, 10, 32)
 T1_PC_height<-c(7.5, 20, 130)
 T2_PC_height<-c(8, 15, 80)
 T3_PC_height<-c(7.5, 17, 174)
-height_data<-data.frame(C1_PC_height, C2_PC_height, C3_PC_height, T1_PC_height, T2_PC_height, T3_PC_height)
+height_data<-data.frame(time, C1_PC_height, C2_PC_height, C3_PC_height, T1_PC_height, T2_PC_height, T3_PC_height)
+height_data
+plot(height_data)
+
+days<-c("14","14","14","14","14","14","35","35","35","35","35","35","49","49","49","49","49","49")
+height1<-c(5,5,5,7.5,8,7.5,10,10,10,20,15,17,71,35.6,32,130,80,174)
+type1<-c("D1C","D1C","D1C","D1T","D1T","D1T","D2C","D2C","D2C","D2T","D2T","D2T","D3C","D3C","D3C","D3T","D3T", "D3T")
+df1<-data.frame(days,height1,type1)
+df1
 library(ggplot2)
-ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width))
+ggplot(height_data, aes(x=time, y=C1_PC_height))+
+  geom_point()
+ggplot(df1, aes(x=days, y=height1, color=type1))+
+  geom_boxplot()
