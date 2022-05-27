@@ -64,6 +64,7 @@ library(ggplot2)
 ggplot(df1, aes(x=days, y=height1, color=type1))+
   geom_boxplot()+
   scale_x_discrete(name="Time [days]")+
-  scale_y_discrete(name="Height [cm]")
-  
+  scale_y_continuous(name="Height [mm]")+
+  theme(legend.position = c(0.2,0.7),
+      legend.title = element_text(colour="black", size=10,face="bold"))
 
