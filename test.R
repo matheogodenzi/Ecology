@@ -12,9 +12,7 @@ biomass
 
 # Control PC Leaf mass (C1l, C2l, C3l, C4l, C5l) [g]
 C1_PC_leaf_mass<-as.numeric(unlist(c(biomass[c(3,4,5,6,7), 3])[1]))
-C1_PC_leaf_mass
 C1_PC_root_mass<-as.numeric(unlist(c(biomass[c(3,4,5,6,7), 2])[1]))
-C1_PC_root_mass
 C2_PC_leaf_mass<-as.numeric(unlist(c(biomass[c(3,4,5,6,7), 7])[1]))
 C2_PC_root_mass<-as.numeric(unlist(c(biomass[c(3,4,5,6,7), 6])[1]))
 C3_PC_leaf_mass<-as.numeric(unlist(c(biomass[c(3,4,5,6,7), 11])[1]))
@@ -25,6 +23,9 @@ C3_PC_root_mass<-as.numeric(unlist(c(biomass[c(3,4,5,6,7), 10])[1]))
 C1_PC_leaf_root_mass<- C1_PC_leaf_mass + C1_PC_root_mass
 C2_PC_leaf_root_mass<- C2_PC_leaf_mass + C2_PC_root_mass
 C3_PC_leaf_root_mass<- C3_PC_leaf_mass + C3_PC_root_mass
+
+Control_total_mass <- c(C1_PC_leaf_root_mass, C2_PC_leaf_root_mass, C3_PC_leaf_root_mass)
+
 # Test PC Leaf mass (T1l, T2l, T3l, T4l, T5l)[g]
 
 T1_PC_leaf_mass<-as.numeric(unlist(c(biomass[c(3,4,5,6,7), 15])[1]))
@@ -39,8 +40,42 @@ T1_PC_leaf_roots_mass<-T1_PC_leaf_mass + T1_PC_root_mass
 T2_PC_leaf_roots_mass<-T2_PC_leaf_mass + T2_PC_root_mass
 T3_PC_leaf_roots_mass<-T3_PC_leaf_mass + T3_PC_root_mass
 
+Test_total_mass <- c(T1_PC_leaf_roots_mass, T2_PC_leaf_roots_mass, T3_PC_leaf_roots_mass)
 
-# looking a the distribution 
-leaf_mass <- c(C1_PC_leaf_mass, T2_PC_leaf_mass, T3_PC_leaf_mass)
+# distribution of leaf mass control 
+leaf_mass_control <- c(C1_PC_leaf_mass, C2_PC_leaf_mass, C3_PC_leaf_mass)
+hist(leaf_mass_control)
 
-hist(leaf_mass)
+
+#  distribution of leaf mass, test
+outlayer_removed <- as.numeric(unlist(c(biomass[c(4,5,6,7), 23])[1]))
+leaf_mass_test_total <- c(T1_PC_leaf_mass, T2_PC_leaf_mass, T3_PC_leaf_mass)
+leaf_mass_test_removed_outliers <- c(T1_PC_leaf_mass, T2_PC_leaf_mass, outlayer_removed)
+leaf_mass_test_removed_outliers[15] <- 0
+leaf_mass_test_removed_outliers
+hist(leaf_mass_test)
+
+# checking for normal distribution 
+shapiro.test(leaf_mass_test_removed_outliers)
+
+
+# t-test total mass
+t.test(Test_total_mass, Control_total_mass)
+
+
+
+# creating df to compare tests and controls
+leaf.mass.control.1 <-leaf_mass_control
+leaf.mass.test.1 <- leaf_mass_test_total
+df <- data.frame(leaf.mass.control.1, leaf.mass.test.1)
+
+detach(df)
+library(psych)
+attach(df)
+describeBy(df)
+detach(df)
+
+#t-test leaf_mass
+t.test(leaf_mass_control, leaf_mass_test_total)
+
+#t-test 
