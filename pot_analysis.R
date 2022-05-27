@@ -64,3 +64,39 @@ mtext("Time (Hours)",side=1,col="black",line=2.5)
 ## Add Legend
 legend("topleft",legend=c("Beta Gal","Cell Density"),
        text.col=c("black","red"),pch=c(16,15),col=c("black","red"))
+
+
+
+### plot environmental
+
+### ajouter une importation excel depuis FunEco
+# pour raccourcir le nom
+data <- FunEco_OUTSIDE
+
+# prend l'horodatage des trois périodes de 24h précédent les mesures de terrain
+dates_1 <- c(data[ (293:341),1])
+dates_2 <- c(data[ (1301:1349),1])
+dates_3 <- c(data[ (1973:2021),1])
+
+time <- c(12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12)
+# donnees d'ensoleillement
+sun_1 <- c(data[ (293:341),2])
+sun_2 <- c(data[ (1301:1349),2])
+sun_3 <- c(data[ (1973:2021),2])
+
+# donnees d'humidite de l'air
+hum_1 <- c(data[ (293:341),3])
+hum_2 <- c(data[ (1301:1349),3])
+hum_3 <- c(data[ (1973:2021),3])
+
+# donnees de temperature de l'air
+temp_1 <- c(data[ (293:341),4])
+temp_2 <- c(data[ (1301:1349),4])
+temp_3 <- c(data[ (1973:2021),4])
+
+# donnees de precipitation
+precip_1 <- c(data[ (293:341),5])
+precip_2 <- c(data[ (1301:1349),5])
+precip_3 <- c(data[ (1973:2021),5])
+
+
