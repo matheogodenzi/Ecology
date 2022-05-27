@@ -75,3 +75,19 @@ T_PC_leaf_area<- (T1_PC_leaf_area + T2_PC_leaf_area + T3_PC_leaf_area)/3
 # Boxplot
 
 boxplot(C_PC_leaf_area, T_PC_leaf_area, names=c("CPCla", "TPCla"), ylab="Area [cm]")
+
+
+### Other plots ###
+# as the data from excel is corrupted, manual input is made
+
+# Height
+time(1,2,3)
+C1_PC_height<-c(5, 10, 71)
+C2_PC_height<-c(5, 10, 35.6)
+C3_PC_height<-c(5, 10, 32)
+T1_PC_height<-c(7.5, 20, 130)
+T2_PC_height<-c(8, 15, 80)
+T3_PC_height<-c(7.5, 17, 174)
+height_data<-data.frame(C1_PC_height, C2_PC_height, C3_PC_height, T1_PC_height, T2_PC_height, T3_PC_height)
+library(ggplot2)
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width))
