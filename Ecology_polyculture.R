@@ -12,9 +12,9 @@ data
 
 # Control PC Leaf mass (C1l, C2l, C3l, C4l, C5l) [g]
 C1_PC_leaf_mass<-as.numeric(unlist(c(data[c(3,4,5,6,7), 3])[1]))
-C1_PC_leaf_mass
+# C1_PC_leaf_mass
 C1_PC_root_mass<-as.numeric(unlist(c(data[c(3,4,5,6,7), 2])[1]))
-C1_PC_root_mass
+# C1_PC_root_mass
 C2_PC_leaf_mass<-as.numeric(unlist(c(data[c(3,4,5,6,7), 7])[1]))
 C2_PC_root_mass<-as.numeric(unlist(c(data[c(3,4,5,6,7), 6])[1]))
 C3_PC_leaf_mass<-as.numeric(unlist(c(data[c(3,4,5,6,7), 11])[1]))
@@ -38,7 +38,6 @@ T3_PC_root_mass<-as.numeric(unlist(c(data[c(3,4,5,6,7), 22])[1]))
 T1_PC_leaf_roots_mass<-T1_PC_leaf_mass + T1_PC_root_mass
 T2_PC_leaf_roots_mass<-T2_PC_leaf_mass + T2_PC_root_mass
 T3_PC_leaf_roots_mass<-T3_PC_leaf_mass + T3_PC_root_mass
-
 
 
 
