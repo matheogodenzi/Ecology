@@ -60,3 +60,10 @@ boxplot(C_PC_leaf_root_mass, T_PC_leaf_root_mass, C_PC_leaf_mass, T_PC_leaf_mass
 
 ### Leaf area ###
 
+C1_PC_leaf_area
+C2_PC_leaf_area
+C3_PC_leaf_area
+
+T1_PC_leaf_area
+T2_PC_leaf_area
+T3_PC_leaf_area
