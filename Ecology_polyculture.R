@@ -7,7 +7,7 @@
 # pseudo-replications are compiled into an avg that yields into one replication
 # Replications are input for the boxplots
 
-data<-read_excel("C:/Users/mimag/Desktop/Ecology/data_masse_and_area.xlsx")
+data<-read_excel("data_masse_and_area.xlsx")
 data
 
 # Control PC Leaf mass (C1l, C2l, C3l, C4l, C5l) [g]
