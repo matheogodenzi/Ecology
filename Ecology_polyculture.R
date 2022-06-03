@@ -6,7 +6,7 @@
 # Test : 3 replications, with 5 pseudo-replications
 # pseudo-replications are compiled into an avg that yields into one replication
 # Replications are input for the boxplots
-
+library(readxl)
 data<-read_excel("data_masse_and_area.xlsx")
 data
 
@@ -58,6 +58,17 @@ height1<-c(5,5,5,7.5,8,7.5,10,10,10,20,15,17,71,35.6,32,130,80,174)
 type1<-c("D1C","D1C","D1C","D1T","D1T","D1T","D2C","D2C","D2C","D2T","D2T","D2T","D3C","D3C","D3C","D3T","D3T", "D3T")
 df1<-data.frame(days,height1,type1)
 df1
+# meteo data used as overlay to height graph
+datameteo<-read_excel("FunEco-OUTSIDE.xlsx")
+datameteo
+temperature<-datameteo[-c(1,2,3,4),4]
+temperature
+meteotime<-datameteo[-c(1,2,3,4),1]
+meteotime
+#meteotime needs to be tranformed to days before use
+
+
+
 library(ggplot2)
 #ggplot(height_data, aes(x=time, y=C1_PC_height))+
   #geom_point()
@@ -66,5 +77,6 @@ ggplot(df1, aes(x=days, y=height1, color=type1))+
   scale_x_discrete(name="Time [days]")+
   scale_y_continuous(name="Height [mm]")+
   theme(legend.position = c(0.2,0.7),
-      legend.title = element_text(colour="black", size=10,face="bold"))
-
+      legend.title = element_text(colour="black", size=10,face="bold"))+
+  geom_line()
+  
