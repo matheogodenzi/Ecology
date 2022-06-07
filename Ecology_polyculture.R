@@ -61,14 +61,38 @@ df1
 # meteo data used as overlay to height graph
 datameteo<-read_excel("FunEco-OUTSIDE.xlsx")
 datameteo
-temperature<-datameteo[-c(1,2,3,4),4]
-temperature
+meteotemperature<-datameteo[-c(1,2,3,4),4]
+meteotemperature
+meteoprecipitations<-datameteo[-c(1,2,3,4),5]
+meteoRH<-datameteo[-c(1,2,3,4), 3]
+meteolight<-datameteo[-c(1,2,3,4), 2]
 meteotime<-datameteo[-c(1,2,3,4),1]
 meteotime
-#meteotime needs to be tranformed to days before use
+# meteotime needs to be tranformed to days before use
+# measurements begin on 31.03.2022 at 11:00
+# raw data is given in wierd unit from an arbitrary point
+# extracting and reference to zero
+prcmeteotime<-as.numeric(unlist(c(meteotime))) -44651.5
+# converting to days
+# 2060 records, one record every 30 min = 0.5 hours = 1/48 day
 
-
-
+# last record : prcmeteotime[2060]
+# measurements begin on 31.03.2022 at 11:00 to 13.05.2022 at 9:30
+# days at final measurement: 
+# 13h + 30 days + 12 days + 9h30 = 42 days + 22h30
+# = 42 days + 22.5/24 days = 42.9375 --> kinda looks like prcmeteotime[2060]
+(42 + (22.5/24) - prcmeteotime[2060])*24
+# = 1h shift between both methods... conclusion: prcmeteotime is in days
+# and works well when correct origin is set
+# in the end we're plotting with the height data,
+# meteo began records 6 days late, so adjusting origin again
+prcmeteotime<-prcmeteotime + 6
+prcmeteotime[2060]
+# processed dataframe of meteo data: time, luminosity, RH, Temp, Precipitations
+dfmeteo<-data.frame(prcmeteotime, meteolight, meteoRH, meteotemperature, meteoprecipitations)
+dfmeteo
+mxtemp<-as.matrix(data.frame(prcmeteotime, meteotemperature))
+mxtemp
 library(ggplot2)
 #ggplot(height_data, aes(x=time, y=C1_PC_height))+
   #geom_point()
@@ -77,6 +101,13 @@ ggplot(df1, aes(x=days, y=height1, color=type1))+
   scale_x_discrete(name="Time [days]")+
   scale_y_continuous(name="Height [mm]")+
   theme(legend.position = c(0.2,0.7),
-      legend.title = element_text(colour="black", size=10,face="bold"))+
+      legend.title = element_text(colour="black", size=10,face="bold"))
+  
+  # nxm c'est vraiment dur à combiner les deux graphes
+ggplot(dftemp, aes(x = prcmeteotime, y = meteotemperature, colour = "red"))+
   geom_line()
   
+df1
+# trois subplots avec les data meteo
+
+
