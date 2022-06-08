@@ -183,3 +183,30 @@ plot(time, dif3, pch=15,  xlab="", ylab="", ylim=c(0,1),
      axes=FALSE, type="p", col="red")
 
 
+
+
+### Leaf area extraction
+# Control PC leaf area [cm^2]
+C1_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 4])[1]))
+C2_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 8])[1]))
+C3_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 12])[1]))
+
+# Test PC leaf area [cm^2]
+T1_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 16])[1]))
+T2_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 20])[1]))
+T3_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 24])[1]))
+
+leaf_area_vect <- c(C1_PC_leaf_area,C2_PC_leaf_area,C3_PC_leaf_area,T1_PC_leaf_area,T2_PC_leaf_area,T3_PC_leaf_area)
+
+Types <- c("Control")
+for (i in 1:14){
+  Types <- c(Types,"Control")
+}
+for (i in 1:15{
+  Types <- c(Types, "Test")
+}
+
+Types
+
+df_leaf_area <- data.frame(C_leaf_area,Types)
+df_leaf_area
