@@ -1,13 +1,13 @@
 #install.packages("readxl")
 library(readxl)
 
-MeteoData=read_excel('FunEco-OUTSIDE.xlsx')
+MeteoData=FunEco-OUTSIDE
 MeteoData
 
-MeasureCampaign = read_excel('Measurement Campaign.xlsx')
+MeasureCampaign =Measurement Campaign
 MeasureCampaign
 
-biomass = read_excel('data_masse_and_area.xlsx')
+biomass = data_masse_and_area
 biomass
 
 # comparing masses
