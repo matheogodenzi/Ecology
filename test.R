@@ -24,6 +24,12 @@ C1_PC_leaf_mass_out<-as.numeric(unlist(c(biomass[c(3,4,5,6), 3])[1]))
 C1_PC_root_mass_out<-as.numeric(unlist(c(biomass[c(3,4,5,6), 2])[1]))
 # Control PC Leaf + Root mass (C1lr, C2lr, C3lr, C4lr, C5lr) [g]
 
+
+C_root_total_mass <- c(C1_PC_root_mass,
+                       C2_PC_root_mass,
+                       C3_PC_root_mass
+                       )
+
 # mass 
 
 C1_PC_leaf_root_mass<- C1_PC_leaf_mass + C1_PC_root_mass
@@ -73,54 +79,61 @@ Test_total_mass_out
 
 C_root_mass <- c(C1_PC_root_mass, C2_PC_root_mass, C3_PC_root_mass)
 T_root_mass <- c(T1_PC_root_mass, T2_PC_root_mass, T3_PC_root_mass)
-hist(T_root_mass)
-hist(C_root_mass)
+hist(log(T_root_mass*100), breaks=10)
+hist(log(C_root_mass), breaks=5) 
 
 #test de normalité longeur des racines 
-T3_PC_leaf_mass_out<-as.numeric(unlist(c(biomass[c(5,6,7), 23])[1]))
-T_root_mass_out <- c(T1_PC_root_mass, T2_PC_root_mass, T3_PC_root_mass_out)
-shapiro.test(sqrt(C_root_mass))
+T1_PC_root_mass_out<-as.numeric(unlist(c(biomass[c(4,5,6,7), 14])[1]))
+T_root_mass_out <- c(T1_PC_root_mass_out, T2_PC_root_mass, T3_PC_root_mass_out)
+shapiro.test(log(C_root_mass))
 shapiro.test(log(T_root_mass))
 shapiro.test(log(T_root_mass_out))
-hist(log(T_root_mass_out))
+hist(log(T_root_mass_out), breaks=5)
+
+t.test(log(C_root_mass), log(T_root_mass_out))
 
 
 # test total mass
-hist(log(Control_total_mass),  breaks = 10) 
-hist(log(Control_total_mass_out),  breaks = 10) 
-hist(log(Test_total_mass_out), breaks = 10)
+hist(sqrt(Control_total_mass),  breaks = 10) 
+hist(log(Control_total_mass_out*1000),  breaks = 15) 
+hist(log(Test_total_mass_out*1000), breaks = 15)
 
 #testing for normality
-shapiro.test(sqrt(Control_total_mass_out))
-shapiro.test(sqrt(Test_total_mass_out))
+shapiro.test(log(Control_total_mass_out))
+shapiro.test(log(Test_total_mass_out))
 
 
 
-t.test((Test_total_mass_out), (Control_total_mass_out))
+t.test(log(Control_total_mass_out), log(Test_total_mass_out))
 
 
 # distribution of leaf mass control 
 leaf_mass_control <- c(C1_PC_leaf_mass, C2_PC_leaf_mass, C3_PC_leaf_mass)
 hist(log(leaf_mass_control), breaks = 10) 
 hist(sqrt(leaf_mass_control), breaks = 10)
+leaf_mass_control
+C1_PC_leaf_mass_out <- as.numeric(unlist(c(biomass[c(3,4,5,6), 3])[1]))
+leaf_mass_control_out <- c(C1_PC_leaf_mass_out, C2_PC_leaf_mass, C3_PC_leaf_mass)
+hist(log(leaf_mass_control_out), breaks = 10) 
+
 
 #  distribution of leaf mass, test
 outlayer_removed <- as.numeric(unlist(c(biomass[c(4,5,6,7), 23])[1]))
 leaf_mass_test_total <- c(T1_PC_leaf_mass, T2_PC_leaf_mass, T3_PC_leaf_mass)
 leaf_mass_test_removed_outliers <- c(T1_PC_leaf_mass, T2_PC_leaf_mass, outlayer_removed)
-leaf_mass_test_removed_outliers[15] <- 0
 leaf_mass_test_removed_outliers
-hist(log(leaf_mass_test_removed_outliers), breaks= 15) 
-hist(sqrt(leaf_mass_test_removed_outliers), breaks= 15) 
+hist(log(log(leaf_mass_test_removed_outliers*1000)), breaks= 6)   
+hist(log(log(leaf_mass_control_out*1000)), breaks= 6) 
 
 # checking for normal distribution 
-shapiro.test(sqrt(leaf_mass_test_removed_outliers))
-shapiro.test(sqrt(leaf_mass_test_removed_outliers))
+shapiro.test(log(log(leaf_mass_test_removed_outliers*1000)))
+shapiro.test(log(leaf_mass_control))
+shapiro.test(log(log(leaf_mass_control_out*1000)))
 
 ?anova
 
 # t-test total mass
-t.test((Test_total_mass),(Control_total_mass)) 
+t.test(log(leaf_mass_control_out),log(leaf_mass_test_removed_outliers)) 
 
 
 # creating df to compare tests and controls
@@ -174,7 +187,7 @@ shapiro.test(T_camp1_mean)
 shapiro.test(T_camp2_mean)
 shapiro.test(T_camp3_mean)
 
-hist(T_camp3_mean)
+hist(T_camp1_mean)
 # t-test
 first <- t.test(C_camp1_mean,T_camp1_mean)
 first
