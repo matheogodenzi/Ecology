@@ -1,6 +1,6 @@
 library(readxl)
 
-MeasureCampaign = read_excel('Measurement Campaign.xlsx')
+MeasureCampaign = Measurement_Campaign
 MeasureCampaign
 
 
@@ -106,9 +106,6 @@ legend("topleft",legend=c("Light Intensity","Temperature Evolution"),
        text.col=c("black","red"),pch=c(16,15),col=c("black","red"))
 
 
-?plot
-
-
 ### plot second time
 
 ## add extra space to right margin of plot within frame
@@ -138,13 +135,11 @@ axis(1,pretty(range(time),10))
 mtext("Time (Hours)",side=1,col="black",line=2.5)  
 
 ## Add Legend
-legend("topleft",legend=c("Light Intensity","Temperature Evolution"),
+legend("topleft",legend=c("Light Intensity","Temperature"),
        text.col=c("black","red"),pch=c(16,15),col=c("black","red"))
 
 
 ### rd plot
-
-?plot
 
 ## add extra space to right margin of plot within frame
 par(mar=c(5, 4, 4, 6) + 0.1)
@@ -152,13 +147,14 @@ par(mar=c(5, 4, 4, 6) + 0.1)
 ## Plot first set of data and draw its axis
 
 plot(time, sun_3, pch=16, axes=FALSE, ylim=c(0,4000), xlab="", ylab="", 
-     type="l",col="black", main="3st Campaign")
+     type="l",col="black", main="3rd Campaign")
 axis(2, ylim=c(0,1),col="black",las=1)  ## las=1 makes horizontal labels
 mtext("PAR (µmol/m^2/s)",side=2,line=2.5)
 box()
 
 ## Allow a second plot on the same graph
 par(new=TRUE)
+
 
 ## Plot the second plot and put axis scale on right
 plot(time, temp_3, pch=15,  xlab="", ylab="", ylim=c(0,30), 
@@ -173,7 +169,7 @@ axis(1,pretty(range(time),10))
 mtext("Time (Hours)",side=1,col="black",line=2.5)  
 
 ## Add Legend
-legend("topright",legend=c("Light Intensity","Temperature Evolution"),
+legend("topleft",legend=c("Light Intensity","Temperature"),
        text.col=c("black","red"),pch=c(16,15),col=c("black","red"))
 
 ## Allow a third plot on the same graph
@@ -182,4 +178,35 @@ par(new=TRUE)
 plot(time, dif3, pch=15,  xlab="", ylab="", ylim=c(0,1), 
      axes=FALSE, type="p", col="red")
 
+
+
+
+
+
+### Leaf area extraction¨
+data = read_excel("data_masse_and_area.xlsx")
+# Control PC leaf area [cm^2]
+C1_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 4])[1]))
+C2_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 8])[1]))
+C3_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 12])[1]))
+
+# Test PC leaf area [cm^2]
+T1_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 16])[1]))
+T2_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 20])[1]))
+T3_PC_leaf_area<-as.numeric(unlist(c(data[c(3,4,5,6,7), 24])[1]))
+
+leaf_area_vect <- c(C1_PC_leaf_area,C2_PC_leaf_area,C3_PC_leaf_area,T1_PC_leaf_area,T2_PC_leaf_area,T3_PC_leaf_area)
+
+Types <- c("Control")
+for (i in 1:14){
+  Types <- c(Types,"Control")
+}
+for (i in 1:15{
+  Types <- c(Types, "Test")
+}
+
+Types
+
+df_leaf_area <- data.frame(C_leaf_area,Types)
+df_leaf_area
 
