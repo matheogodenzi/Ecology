@@ -55,7 +55,7 @@ plot(height_data)
 
 days<-c("14","14","14","14","14","14","35","35","35","35","35","35","49","49","49","49","49","49")
 height1<-c(5,5,5,7.5,8,7.5,10,10,10,20,15,17,71,35.6,32,130,80,174)
-type1<-c("D1C","D1C","D1C","D1T","D1T","D1T","D2C","D2C","D2C","D2T","D2T","D2T","D3C","D3C","D3C","D3T","D3T", "D3T")
+type1<-c("D2C","D2C","D2C","D2T","D2T","D2T","D3C","D3C","D3C","D3T","D3T","D3T","D4C","D4C","D4C","D4T","D4T", "D4T")
 df1<-data.frame(days,height1,type1)
 df1
 # meteo data used as overlay to height graph
